@@ -68,9 +68,13 @@ git clone https://github.com/yanx27/Pointnet_Pointnet2_pytorch.git
 Run the depth/XYZ generation scripts (optionally driven by `generate_syn_dataset` if you use it):
 ```bash
 cd gen_synthetic_data
-python create_depth_graspable_xyz.py   # outputs graspable (good) depth/XYZ
-python create_depth_nongraspable_xyz.py   # outputs non-graspable (bad) depth/XYZ
+python create_depth_graspable_xyz.py --good-scale --num-pairs 5000   # outputs graspable (good) depth/XYZ
+python create_depth_nongraspable_xyz.py --bad --num-pairs 1000   # outputs non-graspable (bad) depth/XYZ
 ```
+**Note:**  
+The code organizes outputs into separate folders for each augmentation type. This is intentional to help with understanding and visualizing the generated data, and to support tuning of hyperparameters.
+Before using the data for training, you may want to modify the code to remove this folder-wise separation and consolidate the dataset.
+
 Adjust any paths, camera intrinsics (`camera.json`), and output directories inside the scripts as needed.
 ### 2. Train the model
 From the repo root (with `Pointnet_Pointnet2_pytorch` in place):
